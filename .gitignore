@@ -1,15 +1,44 @@
+# Archivos y carpetas de Android Studio
 *.iml
-.gradle
-/local.properties
+.idea/
+.gradle/
+local.properties
+.DS_Store
+
+# Output de compilación
+/build/
+**/build/
+.cxx/
+.externalNativeBuild/
+
+# Archivos de cache
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+
+# Capturas de pantalla de Android Studio
+/captures/
+
+# Logs
+*.log
+
+# Archivos del sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos de configuración del usuario
+*.keystore
+*.jks
+
+# IntelliJ
+*.ipr
+*.iws
+out/
+
+# Kotlin
+.kotlinc/
+
