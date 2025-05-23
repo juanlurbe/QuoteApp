@@ -16,18 +16,19 @@ Aplicación Android desarrollada con **Jetpack Compose**, que permite al usuario
 
 com.tp3.grupo4/
 ├── data/
-│ ├── local/ --> Room: DAO y entidades
-│ ├── remote/ --> Retrofit: API + data source
-│ └── repository/ --> Implementación del repositorio
+│   ├── local/        # Room: DAO y entidades
+│   ├── remote/       # Retrofit: API + data source
+│   └── repository/   # Implementación del repositorio
 ├── domain/
-│ ├── model/ --> Modelos del dominio
-│ ├── repository/ --> Interfaces
-│ └── usecase/ --> Casos de uso
+│   ├── model/        # Modelos del dominio
+│   ├── repository/   # Interfaces
+│   └── usecase/      # Casos de uso
 ├── presentation/
-│ ├── screen/ --> Pantallas de UI (Compose)
-│ ├── navigation/ --> NavHost y rutas
-│ └── viewmodel/ --> ViewModels
-├── di/ --> Módulos de Hilt
-├── core/ --> Config y constantes
-└── QuoteApplication.kt --> Clase Application
+│   ├── screen/       # Pantallas de UI (Compose)
+│   ├── navigation/   # NavHost y rutas
+│   └── viewmodel/    # ViewModels
+├── di/               # Módulos de Hilt
+├── core/             # Config y constantes
+└── QuoteApplication.kt  # Clase Application
+
 
