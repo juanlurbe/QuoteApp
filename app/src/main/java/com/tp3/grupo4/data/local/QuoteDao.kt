@@ -12,6 +12,9 @@ interface QuoteDao {
     @Delete
     suspend fun deleteQuote(quote: FavoriteQuoteEntity)
 
+    @Update
+    suspend fun updateQuote(quote: FavoriteQuoteEntity)
+
     @Query("SELECT * FROM favorite_quotes")
     fun getAllQuotes(): Flow<List<FavoriteQuoteEntity>>
 }

@@ -8,8 +8,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +24,7 @@ fun FavoriteQuotesScreen(
     navController: NavHostController
 ) {
     val favorites = viewModel.favoriteQuotes.collectAsState()
+    var quoteToEdit by remember { mutableStateOf<FavoriteQuoteEntity?>(null) }
 
     Scaffold(
         topBar = {
@@ -56,10 +56,21 @@ fun FavoriteQuotesScreen(
                 items(favorites.value) { quote ->
                     FavoriteQuoteItem(
                         quote = quote,
-                        onEdit = {  },
+                        onEdit = { quoteToEdit = quote },
                         onDelete = { viewModel.removeFavorite(quote) }
                     )
                 }
+            }
+
+            quoteToEdit?.let { quote ->
+                EditFavoriteDialog(
+                    quote = quote,
+                    onDismiss = { quoteToEdit = null },
+                    onConfirm = {
+                        viewModel.editFavorite(it)
+                        quoteToEdit = null
+                    }
+                )
             }
         }
     }
@@ -94,4 +105,52 @@ fun FavoriteQuoteItem(
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EditFavoriteDialog(
+    quote: FavoriteQuoteEntity,
+    onDismiss: () -> Unit,
+    onConfirm: (FavoriteQuoteEntity) -> Unit
+) {
+    var phrase by remember { mutableStateOf(quote.phrase) }
+    var author by remember { mutableStateOf(quote.author) }
+    var category by remember { mutableStateOf(quote.category) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Editar frase") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(
+                    value = phrase,
+                    onValueChange = { phrase = it },
+                    label = { Text("Frase") }
+                )
+                OutlinedTextField(
+                    value = author,
+                    onValueChange = { author = it },
+                    label = { Text("Autor") }
+                )
+                OutlinedTextField(
+                    value = category,
+                    onValueChange = { category = it },
+                    label = { Text("Categoría") }
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onConfirm(quote.copy(phrase = phrase, author = author, category = category))
+            }) {
+                Text("Guardar")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        }
+    )
 }

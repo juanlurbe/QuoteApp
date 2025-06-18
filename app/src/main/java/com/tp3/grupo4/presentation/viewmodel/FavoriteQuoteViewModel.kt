@@ -25,4 +25,10 @@ class FavoriteQuoteViewModel @Inject constructor(
             favoriteQuoteUseCase.removeFromFavorites(quote)
         }
     }
+
+    fun editFavorite(quote: FavoriteQuoteEntity) {
+        viewModelScope.launch {
+            favoriteQuoteUseCase.editFavorite(quote)
+        }
+    }
 }

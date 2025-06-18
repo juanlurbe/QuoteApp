@@ -15,6 +15,10 @@ class LocalDataSource @Inject constructor(
         quoteDao.deleteQuote(quote)
     }
 
+    suspend fun updateQuote(quote: FavoriteQuoteEntity) {
+        quoteDao.updateQuote(quote)
+    }
+
     fun getAllQuotes(): Flow<List<FavoriteQuoteEntity>> {
         return quoteDao.getAllQuotes()
     }

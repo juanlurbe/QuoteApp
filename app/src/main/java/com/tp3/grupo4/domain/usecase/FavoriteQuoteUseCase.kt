@@ -17,6 +17,10 @@ class FavoriteQuoteUseCase @Inject constructor(
         localDataSource.deleteQuote(quote)
     }
 
+    suspend fun editFavorite(quote: FavoriteQuoteEntity) {
+        localDataSource.updateQuote(quote)
+    }
+
     fun getAllFavorites(): Flow<List<FavoriteQuoteEntity>> {
         return localDataSource.getAllQuotes()
     }
